@@ -80,24 +80,8 @@ export const timeline: TimelineItem[] = [
     date: "28 de Agosto 2026",
     title: "Nuestra primera cita",
     text: "El dia en que todo cambio, aunque fue nuestra primera cita juntos tambien fue en la que decidi tomar el riesgo de decirte lo que sentia luego de meses hablando, de concerte y de estas seguro de que me gustabas",
-    photo: "public/photos/Primera_cita.jpg",
-  },
-  {
-    date: "18 de Mayo, 2024",
-    title: "REEMPLAZAR Nuestro primer viaje juntos",
-    text: "El mar, el viento helado en la cara y esa sensación irrepetible de que con la persona correcta cualquier lugar es el paraíso.",
-    photo: "/photos/02.webp",
-  },
-  {
-    date: "25 de Diciembre, 2024",
-    title: "REEMPLAZAR La noche que no queríamos que terminara",
-    text: "Bailando en la sala a oscuras, solo con las luces del árbol y nuestras canciones favoritas sonando bajito.",
-  },
-  {
-    date: "Hoy y siempre",
-    title: "REEMPLAZAR Lo que aún nos queda por escribir",
-    text: "Todos los amaneceres, las metas compartidas y cada sorpresa que el destino nos tiene preparada.",
-  },
+    photo: "/public/photos/Primera_cita.jpg",
+  }
 ];
 
 export const photos: PhotoItem[] = [
