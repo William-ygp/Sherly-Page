@@ -41,7 +41,7 @@ export const MusicSection: React.FC = () => {
       {/* Section Title */}
       <div className="text-center mb-10 sm:mb-14">
         <h2 className="font-serif italic text-3xl sm:text-5xl text-text-main mb-3">
-          Nuestra Banda Sonora
+          Canciones que te dedico
         </h2>
         <p className="font-sans text-text-muted text-sm sm:text-base max-w-md mx-auto">
           Melodías que cuentan quiénes somos y los instantes que nunca quiero olvidar.
