@@ -14,3 +14,4 @@ export function getDeterministicGradient(seed: string): string {
 
   return `linear-gradient(135deg, hsl(${hue1}, 55%, 22%) 0%, hsl(${hue2}, 65%, 12%) 100%)`;
 }
+

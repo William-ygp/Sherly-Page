@@ -122,3 +122,4 @@ export const GateModal: React.FC = () => {
     </div>
   );
 };
+

@@ -145,3 +145,4 @@ export const LetterSection: React.FC = () => {
     </section>
   );
 };
+

@@ -63,3 +63,4 @@ export const ClosingSection: React.FC = () => {
     </section>
   );
 };
+

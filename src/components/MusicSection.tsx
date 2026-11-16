@@ -241,3 +241,4 @@ export const MusicSection: React.FC = () => {
     </section>
   );
 };
+

@@ -145,3 +145,4 @@ El sistema de partículas vectoriales en canvas (`HeartFX`) se activa **únicame
 - **"Una última sorpresa"**: Lluvia grande de 5 s.
 
 *Accesibilidad:* Con `prefers-reduced-motion` activado, las partículas se desactivan automáticamente y las esferas ambientales se pausan para cuidar el rendimiento y la comodidad visual.
+

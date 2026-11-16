@@ -306,3 +306,4 @@ export const HeroCountdown: React.FC = () => {
     </section>
   );
 };
+
