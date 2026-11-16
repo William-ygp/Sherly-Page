@@ -1,12 +1,12 @@
 import type { Config, Surprise, Playlist, Song, Letter, TimelineItem, PhotoItem } from '../types';
 
 export const config: Config = {
-  title: "REEMPLAZAR título (ej. Para toda la vida)",
-  subtitle: "REEMPLAZAR subtítulo (ej. Un rincón con nuestros recuerdos, canciones y una promesa)",
-  from: "REEMPLAZAR (Mi nombre)",
-  to: "REEMPLAZAR (Tu nombre)",
+  title: "Te Amare Para Toda la vida",
+  subtitle: "Un pedacito de nosotros en un rincon digital",
+  from: "Williams",
+  to: "El amor de mi vida (Sherly)",
   // Fecha y hora exactas de la sorpresa con zona horaria (ej. 2026-12-31T20:00:00-05:00)
-  surpriseDate: "2027-02-14T20:00:00-05:00", 
+  surpriseDate: "2026-11-22T20:00:00-05:00",
   showSeconds: false, // Cambia a true si deseas mostrar segundos en la cuenta regresiva
   secureCountdown: false, // Cambia a true para usar la API serverless en Vercel (SURPRISE_DATE en env)
   accessCodeHash: undefined, // Opcional: SHA-256 en minúsculas del PIN/código (ver README)
@@ -57,30 +57,30 @@ export const songs: Song[] = [
 ];
 
 export const letter: Letter = {
-  title: "REEMPLAZAR Para la persona que ilumina mis días",
+  title: "Para mi princesa Hermosa",
   paragraphs: [
-    "No siempre encuentro las palabras exactas en el momento justo, pero quería construir este pequeño refugio para recordarte lo inmenso que es lo que siento por ti.",
-    "Cada canción aquí guardada guarda un pedazo de nosotros: un trayecto en carretera, una risa compartida hasta tarde o ese instante de silencio en el que solo bastaba mirarnos para entenderlo todo.",
-    "Gracias por tu ternura, por tu complicidad y por convertir los días comunes en momentos que atesoro para siempre. Esta página es tuya, como cada una de mis sonrisas.",
+    "Te Amo con cada gota de mi ser mi vida hermosa, con cada latido de mi corazon te amo y te amo cada vez mas, eres la mujer que siempre soñe cuando pensaba con quien me gustaria pasar el resto de mi vida, eres tu esa mujer que estuve toda mi vida esperando.",
+    "Y ahora que estas en mi vida solo pienso en hacerte feliz con cada dia que pase, en amarte y seguirnos eligiendo cada dia sin importar las dificultades o los obstaculos que la vida nos ponga.",
+    "Ahora eres parte de mis sueños de mi futuro te amo como nunca eh amado a nadie, te deseo como nunca eh deseado a nadie y solo quiero que seas feliz a mi lado y yo ser tu complemento en esta vida que deseo vivir junto a ti.",
   ],
-  signature: "Con todo mi amor, por y para siempre.",
+  signature: "Con todo mi amor, por y para siempre... Te amo en todos lo Universos...",
 };
 
 export const messages: string[] = [
   "Eres mi lugar favorito en el mundo entero.",
-  "Adoro la forma en que sonríes cuando crees que no te estoy mirando.",
+  "Adoro la forma en que sonríes ",
   "Gracias por enseñarme que el amor verdadero es tranquilo, cálido y seguro.",
   "No cambiaría ni un solo segundo de todo lo que hemos vivido juntos.",
-  "Incluso en los días nublados, tu voz es mi calma.",
+  "Incluso en los días malos, tu voz me da paz.",
   "Prometo seguir eligiéndote cada día, una y otra vez.",
 ];
 
 export const timeline: TimelineItem[] = [
   {
-    date: "14 de Febrero, 2024",
-    title: "REEMPLAZAR Nuestro primer encuentro",
-    text: "Ese café por la tarde donde una conversación de quince minutos se convirtió en tres horas sin darnos cuenta del tiempo.",
-    photo: "/photos/01.webp",
+    date: "28 de Agosto 2026",
+    title: "Nuestra primera cita",
+    text: "El dia en que todo cambio, aunque fue nuestra primera cita juntos tambien fue en la que decidi tomar el riesgo de decirte lo que sentia luego de meses hablando, de concerte y de estas seguro de que me gustabas",
+    photo: "public/photos/Primera_cita.jpg",
   },
   {
     date: "18 de Mayo, 2024",

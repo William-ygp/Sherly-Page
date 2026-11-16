@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { config, surprise } from '../data/content';
+import { config } from '../data/content';
 import { useFX } from '../context/HeartFXContext';
-import { Sparkles, Gift } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const GLITCH_SYMBOLS = ['¿', '?', '#', '%', '&', '▒', '§', '?', '¿'];
 
@@ -21,7 +21,6 @@ export const HeroCountdown: React.FC = () => {
     isZero: false,
   });
 
-  const [revealed, setRevealed] = useState(false);
   const [glitchText, setGlitchText] = useState('??');
   const [isGlitching, setIsGlitching] = useState(false);
   const [manualGlitch, setManualGlitch] = useState(false);
@@ -60,8 +59,7 @@ export const HeroCountdown: React.FC = () => {
       });
       if (data.released && !hasTriggeredZeroFx.current) {
         hasTriggeredZeroFx.current = true;
-        setRevealed(true);
-        rain(5000, 18);
+        rain(4000, 16);
       }
     } catch {
       // Fallback to local
@@ -84,17 +82,9 @@ export const HeroCountdown: React.FC = () => {
       const res = computeTime();
       setDisplayState(res);
 
-      if (res.isZero) {
-        if (!hasTriggeredZeroFx.current) {
-          hasTriggeredZeroFx.current = true;
-          // Intensify glitch for 2 seconds then reveal
-          setIsGlitching(true);
-          setTimeout(() => {
-            setIsGlitching(false);
-            setRevealed(true);
-            rain(5000, 18);
-          }, 2000);
-        }
+      if (res.isZero && !hasTriggeredZeroFx.current) {
+        hasTriggeredZeroFx.current = true;
+        rain(4000, 16);
       }
     };
 
@@ -114,8 +104,6 @@ export const HeroCountdown: React.FC = () => {
 
   // Random glitch burst every 2-5 seconds for 200-400ms
   useEffect(() => {
-    if (revealed) return;
-
     let timeout: number;
 
     const scheduleGlitch = () => {
@@ -139,11 +127,10 @@ export const HeroCountdown: React.FC = () => {
 
     scheduleGlitch();
     return () => clearTimeout(timeout);
-  }, [revealed]);
+  }, []);
 
   // Manual hover/tap glitch intensifier
   const handleGlitchInteraction = () => {
-    if (revealed) return;
     setManualGlitch(true);
     if (glitchTimerRef.current) clearTimeout(glitchTimerRef.current);
 
@@ -177,133 +164,115 @@ export const HeroCountdown: React.FC = () => {
         {config.subtitle}
       </p>
 
-      {/* Countdown Card OR Surprise Reveal */}
-      {!revealed ? (
-        <div className="w-full max-w-md mx-auto">
-          <div className="liquid-glass rounded-card-lg p-6 sm:p-8 shadow-card border border-white/20">
-            <p className="text-text-muted text-xs uppercase tracking-widest font-sans mb-5">
-              Tiempo para el gran momento
-            </p>
+      {/* Countdown Card (Siempre permanece visible como contador) */}
+      <div className="w-full max-w-md mx-auto">
+        <div className="liquid-glass rounded-card-lg p-6 sm:p-8 shadow-card border border-white/20">
+          <p className="text-text-muted text-xs uppercase tracking-widest font-sans mb-5">
+            Tiempo para nuestro momento
+          </p>
 
-            {/* Countdown Blocks: DÍAS | HORAS | MINUTOS (and SECONDS if enabled) */}
-            <div className="flex items-center justify-center gap-2 sm:gap-4">
-              {/* BLOCK 1: DÍAS (Always ?? with Glitch, NEVER exposed numbers) */}
+          {/* Countdown Blocks: DÍAS | HORAS | MINUTOS (and SECONDS if enabled) */}
+          <div className="flex items-center justify-center gap-2 sm:gap-4">
+            {/* BLOCK 1: DÍAS (Always ?? with Glitch, NEVER exposed numbers) */}
+            <div
+              onClick={handleGlitchInteraction}
+              onMouseEnter={handleGlitchInteraction}
+              aria-label="días: desconocido"
+              className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center cursor-pointer select-none transition-transform active:scale-95"
+            >
               <div
-                onClick={handleGlitchInteraction}
-                onMouseEnter={handleGlitchInteraction}
-                aria-label="días: desconocido"
-                className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center cursor-pointer select-none transition-transform active:scale-95"
+                className={`relative font-sans font-bold text-3xl sm:text-4xl text-accent-gold transition-all duration-150 ${
+                  isGlitching || manualGlitch ? 'glitch-active' : ''
+                }`}
               >
+                {/* Base Text */}
+                <span className="relative z-10 tabular-nums">{glitchText}</span>
+
+                {/* Glitch chromatic split (Rose & Violet) */}
+                {(isGlitching || manualGlitch) && (
+                  <>
+                    <span
+                      aria-hidden="true"
+                      className="glitch-copy-rose absolute inset-0 text-accent-rose pointer-events-none select-none z-0"
+                    >
+                      {glitchText}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="glitch-copy-violet absolute inset-0 text-accent-violet pointer-events-none select-none z-0"
+                    >
+                      {glitchText}
+                    </span>
+                  </>
+                )}
+              </div>
+              <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
+                Días
+              </span>
+            </div>
+
+            {/* Separator */}
+            <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
+              :
+            </span>
+
+            {/* BLOCK 2: HORAS (Within day) */}
+            <div
+              aria-label="horas restantes"
+              className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
+            >
+              <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
+                {pad(displayState.hours)}
+              </span>
+              <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
+                Horas
+              </span>
+            </div>
+
+            {/* Separator */}
+            <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
+              :
+            </span>
+
+            {/* BLOCK 3: MINUTOS */}
+            <div
+              aria-label="minutos restantes"
+              className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
+            >
+              <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
+                {pad(displayState.minutes)}
+              </span>
+              <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
+                Minutos
+              </span>
+            </div>
+
+            {/* Optional SECONDS block */}
+            {config.showSeconds && (
+              <>
+                <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
+                  :
+                </span>
                 <div
-                  className={`relative font-sans font-bold text-3xl sm:text-4xl text-accent-gold transition-all duration-150 ${
-                    isGlitching || manualGlitch ? 'glitch-active' : ''
-                  }`}
+                  aria-label="segundos restantes"
+                  className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
                 >
-                  {/* Base Text */}
-                  <span className="relative z-10 tabular-nums">{glitchText}</span>
-
-                  {/* Glitch chromatic split (Rose & Violet) */}
-                  {(isGlitching || manualGlitch) && (
-                    <>
-                      <span
-                        aria-hidden="true"
-                        className="glitch-copy-rose absolute inset-0 text-accent-rose pointer-events-none select-none z-0"
-                      >
-                        {glitchText}
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="glitch-copy-violet absolute inset-0 text-accent-violet pointer-events-none select-none z-0"
-                      >
-                        {glitchText}
-                      </span>
-                    </>
-                  )}
-                </div>
-                <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
-                  Días
-                </span>
-              </div>
-
-              {/* Separator */}
-              <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
-                :
-              </span>
-
-              {/* BLOCK 2: HORAS (Within day) */}
-              <div
-                aria-label="horas restantes"
-                className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
-              >
-                <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
-                  {pad(displayState.hours)}
-                </span>
-                <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
-                  Horas
-                </span>
-              </div>
-
-              {/* Separator */}
-              <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
-                :
-              </span>
-
-              {/* BLOCK 3: MINUTOS */}
-              <div
-                aria-label="minutos restantes"
-                className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
-              >
-                <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
-                  {pad(displayState.minutes)}
-                </span>
-                <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
-                  Minutos
-                </span>
-              </div>
-
-              {/* Optional SECONDS block */}
-              {config.showSeconds && (
-                <>
-                  <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
-                    :
+                  <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
+                    {pad(displayState.seconds)}
                   </span>
-                  <div
-                    aria-label="segundos restantes"
-                    className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
-                  >
-                    <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
-                      {pad(displayState.seconds)}
-                    </span>
-                    <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
-                      Segundos
-                    </span>
-                  </div>
-                </>
-              )}
-            </div>
+                  <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
+                    Segundos
+                  </span>
+                </div>
+              </>
+            )}
+          </div>
 
-            <p className="text-text-muted/60 text-[11px] mt-5 font-sans">
-              Los días permanecen en secreto hasta el final ✨
-            </p>
-          </div>
+          <p className="text-text-muted/60 text-[11px] mt-5 font-sans">
+            Los días permanecen en secreto hasta el final ✨
+          </p>
         </div>
-      ) : (
-        /* Zero reached -> Surprise Reveal Card */
-        <div className="w-full max-w-lg mx-auto animate-fade-in">
-          <div className="liquid-glass rounded-card-lg p-8 sm:p-10 shadow-card border border-accent-gold/30 relative overflow-hidden text-center">
-            <div className="w-16 h-16 rounded-full bg-accent-gold/15 border border-accent-gold/40 flex items-center justify-center mx-auto mb-6 shadow-glow-gold">
-              <Gift className="w-8 h-8 text-accent-gold animate-bounce" />
-            </div>
-            <h2 className="font-serif italic text-3xl sm:text-4xl text-text-main mb-4 leading-snug">
-              {surprise.title}
-            </h2>
-            <p className="font-sans text-text-muted text-base sm:text-lg leading-relaxed whitespace-pre-line">
-              {surprise.message}
-            </p>
-          </div>
-        </div>
-      )}
+      </div>
     </section>
   );
 };
-
