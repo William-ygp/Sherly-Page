@@ -7,7 +7,7 @@ export const config: Config = {
   to: "El amor de mi vida (Sherly)",
   // Fecha y hora exactas de la sorpresa con zona horaria (ej. 2026-12-31T20:00:00-05:00)
   surpriseDate: "2026-11-22T20:00:00-05:00",
-  showSeconds: false, // Cambia a true si deseas mostrar segundos en la cuenta regresiva
+  showSeconds: true, // Mostrar segundos para ver el contador en vivo segundo a segundo
   secureCountdown: false, // Cambia a true para usar la API serverless en Vercel (SURPRISE_DATE en env)
   accessCodeHash: undefined, // Opcional: SHA-256 en minúsculas del PIN/código (ver README)
 };

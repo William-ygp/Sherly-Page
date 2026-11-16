@@ -171,17 +171,17 @@ export const HeroCountdown: React.FC = () => {
             Tiempo para nuestro momento
           </p>
 
-          {/* Countdown Blocks: DÍAS | HORAS | MINUTOS (and SECONDS if enabled) */}
-          <div className="flex items-center justify-center gap-2 sm:gap-4">
+          {/* Countdown Blocks: DÍAS | HORAS | MINUTOS | SEGUNDOS */}
+          <div className="flex items-center justify-center gap-1 sm:gap-3 w-full">
             {/* BLOCK 1: DÍAS (Always ?? with Glitch, NEVER exposed numbers) */}
             <div
               onClick={handleGlitchInteraction}
               onMouseEnter={handleGlitchInteraction}
               aria-label="días: desconocido"
-              className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center cursor-pointer select-none transition-transform active:scale-95"
+              className="liquid-glass flex-1 max-w-[76px] sm:max-w-[96px] py-3 sm:py-5 px-1 sm:px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center cursor-pointer select-none transition-transform active:scale-95"
             >
               <div
-                className={`relative font-sans font-bold text-3xl sm:text-4xl text-accent-gold transition-all duration-150 ${
+                className={`relative font-sans font-bold text-2xl sm:text-4xl text-accent-gold transition-all duration-150 ${
                   isGlitching || manualGlitch ? 'glitch-active' : ''
                 }`}
               >
@@ -206,61 +206,61 @@ export const HeroCountdown: React.FC = () => {
                   </>
                 )}
               </div>
-              <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
+              <span className="text-[9px] sm:text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
                 Días
               </span>
             </div>
 
             {/* Separator */}
-            <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
+            <span className="text-lg sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
               :
             </span>
 
             {/* BLOCK 2: HORAS (Within day) */}
             <div
               aria-label="horas restantes"
-              className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
+              className="liquid-glass flex-1 max-w-[76px] sm:max-w-[96px] py-3 sm:py-5 px-1 sm:px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
             >
-              <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
+              <span className="font-sans font-bold text-2xl sm:text-4xl text-text-main tabular-nums">
                 {pad(displayState.hours)}
               </span>
-              <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
+              <span className="text-[9px] sm:text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
                 Horas
               </span>
             </div>
 
             {/* Separator */}
-            <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
+            <span className="text-lg sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
               :
             </span>
 
             {/* BLOCK 3: MINUTOS */}
             <div
               aria-label="minutos restantes"
-              className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
+              className="liquid-glass flex-1 max-w-[76px] sm:max-w-[96px] py-3 sm:py-5 px-1 sm:px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
             >
-              <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
+              <span className="font-sans font-bold text-2xl sm:text-4xl text-text-main tabular-nums">
                 {pad(displayState.minutes)}
               </span>
-              <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
+              <span className="text-[9px] sm:text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
                 Minutos
               </span>
             </div>
 
-            {/* Optional SECONDS block */}
-            {config.showSeconds && (
+            {/* SECONDS block (activo para ver el contador en vivo segundo a segundo) */}
+            {(config.showSeconds ?? true) && (
               <>
-                <span className="text-2xl sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
+                <span className="text-lg sm:text-3xl font-serif text-accent-gold/60 animate-pulse select-none">
                   :
                 </span>
                 <div
                   aria-label="segundos restantes"
-                  className="liquid-glass flex-1 max-w-[96px] py-4 sm:py-5 px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
+                  className="liquid-glass flex-1 max-w-[76px] sm:max-w-[96px] py-3 sm:py-5 px-1 sm:px-2 rounded-2xl border border-white/20 flex flex-col items-center justify-center select-none"
                 >
-                  <span className="font-sans font-bold text-3xl sm:text-4xl text-text-main tabular-nums">
+                  <span className="font-sans font-bold text-2xl sm:text-4xl text-accent-gold tabular-nums">
                     {pad(displayState.seconds)}
                   </span>
-                  <span className="text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
+                  <span className="text-[9px] sm:text-[11px] font-sans tracking-wider text-text-muted mt-1 uppercase">
                     Segundos
                   </span>
                 </div>
