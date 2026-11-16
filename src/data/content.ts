@@ -80,7 +80,7 @@ export const timeline: TimelineItem[] = [
     date: "28 de Agosto 2026",
     title: "Nuestra primera cita",
     text: "El dia en que todo cambio, aunque fue nuestra primera cita juntos tambien fue en la que decidi tomar el riesgo de decirte lo que sentia luego de meses hablando, de concerte y de estas seguro de que me gustabas",
-    photo: "/public/photos/Primera_cita.jpg",
+    photo: "/photos/Primera_cita.jpg",
   }
 ];
 

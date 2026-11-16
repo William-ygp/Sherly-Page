@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { photos } from '../data/content';
 import { useFX } from '../context/HeartFXContext';
+import { normalizeAssetUrl } from '../utils/format';
 import { Camera, X, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 
 export const GallerySection: React.FC = () => {
@@ -80,7 +81,7 @@ export const GallerySection: React.FC = () => {
             {/* Image container */}
             <div className="relative aspect-[4/5] w-full bg-[#121118] overflow-hidden">
               <img
-                src={photo.thumb || photo.src}
+                src={normalizeAssetUrl(photo.thumb || photo.src)}
                 alt={photo.caption}
                 loading="lazy"
                 decoding="async"
@@ -173,7 +174,7 @@ export const GallerySection: React.FC = () => {
             className="liquid-glass rounded-card-lg max-w-2xl w-full max-h-[85vh] overflow-hidden flex flex-col items-center justify-center border border-white/25 shadow-2xl relative"
           >
             <img
-              src={photos[lightboxIndex].src}
+              src={normalizeAssetUrl(photos[lightboxIndex].src)}
               alt={photos[lightboxIndex].caption}
               className="w-full max-h-[65vh] object-contain bg-[#0b0a10]"
               onError={(e) => {

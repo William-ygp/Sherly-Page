@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAudio } from '../context/AudioContext';
 import { getDeterministicGradient } from '../utils/gradient';
+import { normalizeAssetUrl } from '../utils/format';
 import {
   Play,
   Pause,
@@ -77,7 +78,7 @@ export const PlayerDock: React.FC = () => {
             <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 border border-white/20 bg-[#121118]">
               {currentSong.cover ? (
                 <img
-                  src={currentSong.cover}
+                  src={normalizeAssetUrl(currentSong.cover)}
                   alt=""
                   className={`w-full h-full object-cover ${isPlaying ? 'animate-spin-slow' : ''}`}
                 />
@@ -180,7 +181,7 @@ export const PlayerDock: React.FC = () => {
           <div className="relative aspect-square w-full max-w-[280px] sm:max-w-[320px] mx-auto rounded-card-lg overflow-hidden shadow-2xl border border-white/15 my-3 bg-[#111018]">
             {currentSong.cover ? (
               <img
-                src={currentSong.cover}
+                src={normalizeAssetUrl(currentSong.cover)}
                 alt={currentSong.title}
                 className="w-full h-full object-cover"
               />

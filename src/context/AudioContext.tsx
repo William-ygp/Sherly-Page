@@ -3,6 +3,7 @@ import type { Song } from '../types';
 import { songs as allSongs } from '../data/content';
 import { useToast } from './ToastContext';
 import { useFX } from './HeartFXContext';
+import { normalizeAssetUrl } from '../utils/format';
 
 type RepeatMode = 'none' | 'all' | 'one';
 
@@ -175,7 +176,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setHasEntered(true);
     // Play initial song softly or preload
     if (audioRef.current && currentSong) {
-      audioRef.current.src = currentSong.file;
+      audioRef.current.src = normalizeAssetUrl(currentSong.file);
       audioRef.current.play().catch(() => {
         // In case file is not present yet or blocked
       });
@@ -189,7 +190,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       nextAudioPreloadRef.current = new Audio();
       nextAudioPreloadRef.current.preload = 'metadata';
     }
-    nextAudioPreloadRef.current.src = nextSongItem.file;
+    nextAudioPreloadRef.current.src = normalizeAssetUrl(nextSongItem.file);
   }, []);
 
   // Play a specific song
@@ -210,8 +211,9 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }
 
       setCurrentSong(song);
-      if (audio.src !== song.file && !audio.src.endsWith(song.file)) {
-        audio.src = song.file;
+      const songUrl = normalizeAssetUrl(song.file);
+      if (audio.src !== songUrl && !audio.src.endsWith(songUrl)) {
+        audio.src = songUrl;
       }
       audio.play().catch((err) => {
         console.warn('Audio playback prevented or missing file:', err);

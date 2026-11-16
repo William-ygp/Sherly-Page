@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { playlists } from '../data/content';
 import { useAudio } from '../context/AudioContext';
 import { getDeterministicGradient } from '../utils/gradient';
+import { normalizeAssetUrl } from '../utils/format';
 import type { Song } from '../types';
 import { Search, Heart, Play, Pause, ChevronDown, Music2 } from 'lucide-react';
 
@@ -127,7 +128,7 @@ export const MusicSection: React.FC = () => {
                 <div className="relative aspect-square w-full rounded-2xl overflow-hidden mb-3 bg-[#111018] shadow-inner">
                   {song.cover ? (
                     <img
-                      src={song.cover}
+                      src={normalizeAssetUrl(song.cover)}
                       alt={song.title}
                       loading="lazy"
                       decoding="async"

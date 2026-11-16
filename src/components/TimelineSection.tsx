@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { timeline } from '../data/content';
+import { normalizeAssetUrl } from '../utils/format';
 import { Calendar } from 'lucide-react';
 
 export const TimelineSection: React.FC = () => {
@@ -94,7 +95,7 @@ export const TimelineSection: React.FC = () => {
                     {item.photo && (
                       <div className="rounded-2xl overflow-hidden border border-white/15 aspect-video bg-[#121118]">
                         <img
-                          src={item.photo}
+                          src={normalizeAssetUrl(item.photo)}
                           alt={item.title}
                           loading="lazy"
                           decoding="async"
