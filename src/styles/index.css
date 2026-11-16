@@ -1,0 +1,257 @@
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/cormorant-garamond/600-italic.css';
+@import '@fontsource/cormorant-garamond/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-base: #07070B;
+  --text-main: #F5F3F7;
+  --text-muted: rgba(245, 243, 247, 0.62);
+  --accent-gold: #F2B8C6;
+  --accent-rose: #FF6B9A;
+  --accent-violet: #8B7CFF;
+  --glass-fill: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --mx: 50%;
+  --my: 50%;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-base);
+  color: var(--text-main);
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Liquid Glass Recipe */
+.liquid-glass {
+  background-color: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45),
+              inset 0 1px 0 rgba(255, 255, 255, 0.35),
+              inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Specular highlight pseudo-element */
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, transparent 45%);
+  z-index: 1;
+}
+
+/* Pointer glow highlight pseudo-element */
+.liquid-glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(350px circle at var(--mx, 50%) var(--my, 50%), rgba(242, 184, 198, 0.14), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+@media (hover: hover) {
+  .liquid-glass:hover::after {
+    opacity: 1;
+  }
+}
+
+.liquid-glass:active::after {
+  opacity: 1;
+}
+
+/* Mobile glass blur optimization */
+@media (max-width: 767px) {
+  .liquid-glass {
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+  }
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .liquid-glass {
+    background-color: #121118;
+  }
+}
+
+/* Fallback for reduced transparency */
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-glass {
+    background-color: #121118 !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* Fallback for high contrast */
+@media (prefers-contrast: more) {
+  .liquid-glass {
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    background-color: #0b0a10 !important;
+  }
+}
+
+/* Content visibility optimization */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Safe areas */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}
+
+.mb-safe {
+  margin-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}
+
+/* Glitch animation keyframes */
+@keyframes glitch-slice-1 {
+  0%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+  20% {
+    clip-path: inset(15% 0 65% 0);
+    transform: translate(-3px, 1px);
+  }
+  40% {
+    clip-path: inset(45% 0 35% 0);
+    transform: translate(3px, -1px);
+  }
+  60% {
+    clip-path: inset(70% 0 10% 0);
+    transform: translate(-2px, -1px);
+  }
+  80% {
+    clip-path: inset(25% 0 55% 0);
+    transform: translate(2px, 1px);
+  }
+}
+
+@keyframes glitch-slice-2 {
+  0%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+  20% {
+    clip-path: inset(60% 0 20% 0);
+    transform: translate(3px, -1px);
+  }
+  40% {
+    clip-path: inset(10% 0 70% 0);
+    transform: translate(-3px, 1px);
+  }
+  60% {
+    clip-path: inset(35% 0 45% 0);
+    transform: translate(2px, 1px);
+  }
+  80% {
+    clip-path: inset(80% 0 5% 0);
+    transform: translate(-2px, -1px);
+  }
+}
+
+.glitch-active .glitch-copy-rose {
+  animation: glitch-slice-1 0.25s steps(2, start) infinite;
+  color: var(--accent-rose);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.glitch-active .glitch-copy-violet {
+  animation: glitch-slice-2 0.25s steps(2, start) infinite;
+  color: var(--accent-violet);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+/* Ambient orb float animations */
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(80px, -60px) scale(1.12); }
+  66% { transform: translate(-60px, 50px) scale(0.92); }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-70px, 60px) scale(0.88); }
+  66% { transform: translate(50px, -40px) scale(1.15); }
+}
+
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 50px) scale(1.08); }
+}
+
+.ambient-orb-1 {
+  animation: orb-float-1 45s ease-in-out infinite;
+}
+
+.ambient-orb-2 {
+  animation: orb-float-2 55s ease-in-out infinite;
+}
+
+.ambient-orb-3 {
+  animation: orb-float-3 50s ease-in-out infinite;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-active .glitch-copy-rose,
+  .glitch-active .glitch-copy-violet {
+    animation: none !important;
+    display: none !important;
+  }
+  .ambient-orb,
+  .ambient-orb-1,
+  .ambient-orb-2,
+  .ambient-orb-3 {
+    animation-play-state: paused !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07070B;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}

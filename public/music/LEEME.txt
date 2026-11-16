@@ -1,0 +1,28 @@
+=== CÓMO SUBIR TU MÚSICA ===
+
+1. Coloca tus archivos de audio (.mp3) en esta carpeta (`public/music/`).
+   Ejemplo:
+     public/music/mi-cancion-favorita.mp3
+
+2. (Opcional) Si quieres añadir carátula para cada canción, coloca las imágenes en formato .webp o .jpg en `public/covers/`.
+   Ejemplo:
+     public/covers/mi-cancion-favorita.webp
+
+3. Registra la canción en `src/data/content.ts` en la lista `songs`:
+   {
+     id: "mi-cancion-1",
+     title: "Título de la canción",
+     artist: "Nombre del artista",
+     file: "/music/mi-cancion-favorita.mp3",
+     cover: "/covers/mi-cancion-favorita.webp", // Opcional (si no tiene, se genera un degradado armónico)
+     note: "Por qué elegí esta canción para nosotros...",
+     playlist: "primera" // Coincide con el id de alguna de tus listas
+   }
+
+=== CONSEJOS DE OPTIMIZACIÓN CON FFMPEG ===
+Para que la página cargue instantáneamente en teléfonos móviles con datos o conexiones lentas, se recomienda codificar los archivos MP3 a 128 o 192 kbps:
+
+  ffmpeg -i "archivo_original.m4a" -b:a 192k -map_metadata 0 "public/music/mi-cancion.mp3"
+
+=== ALMACENAMIENTO EXTERNO (S3, CLOUDFLARE R2 O CDN) ===
+Si tienes muchas canciones o archivos pesados, puedes subirlos a un bucket público o CDN y poner la URL completa en `file` (ej. "https://cdn.misitio.com/cancion.mp3"). Recuerda actualizar la directiva `media-src` en `vercel.json` para permitir ese dominio.
