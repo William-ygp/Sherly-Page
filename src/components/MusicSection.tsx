@@ -67,11 +67,10 @@ export const MusicSection: React.FC = () => {
           {/* Todas */}
           <button
             onClick={() => setPlaylist('todas')}
-            className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-sans transition-all cursor-pointer border ${
-              activePlaylist === 'todas'
+            className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-sans transition-all cursor-pointer border ${activePlaylist === 'todas'
                 ? 'bg-accent-gold/20 text-accent-gold border-accent-gold/40 shadow-glow-gold'
                 : 'liquid-glass text-text-muted hover:text-text-main border-white/10'
-            }`}
+              }`}
           >
             Todas
           </button>
@@ -79,11 +78,10 @@ export const MusicSection: React.FC = () => {
           {/* Favoritas */}
           <button
             onClick={() => setPlaylist('favoritas')}
-            className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-sans transition-all cursor-pointer flex items-center gap-1.5 border ${
-              activePlaylist === 'favoritas'
+            className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-sans transition-all cursor-pointer flex items-center gap-1.5 border ${activePlaylist === 'favoritas'
                 ? 'bg-accent-rose/20 text-accent-rose border-accent-rose/40 shadow-glow-rose'
                 : 'liquid-glass text-text-muted hover:text-text-main border-white/10'
-            }`}
+              }`}
           >
             <Heart className="w-3 h-3 fill-current" />
             Favoritas ({favorites.length})
@@ -94,11 +92,10 @@ export const MusicSection: React.FC = () => {
             <button
               key={pl.id}
               onClick={() => setPlaylist(pl.id)}
-              className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-sans transition-all cursor-pointer border ${
-                activePlaylist === pl.id
+              className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-sans transition-all cursor-pointer border ${activePlaylist === pl.id
                   ? 'bg-accent-gold/20 text-accent-gold border-accent-gold/40 shadow-glow-gold'
                   : 'liquid-glass text-text-muted hover:text-text-main border-white/10'
-              }`}
+                }`}
             >
               {pl.name}
             </button>
@@ -118,11 +115,10 @@ export const MusicSection: React.FC = () => {
               <div
                 key={song.id}
                 onClick={() => handleCardClick(song)}
-                className={`liquid-glass rounded-card p-3 sm:p-4 border transition-all duration-300 flex flex-col justify-between cursor-pointer group hover:scale-[1.01] ${
-                  isCurrent
+                className={`liquid-glass rounded-card p-3 sm:p-4 border transition-all duration-300 flex flex-col justify-between cursor-pointer group hover:scale-[1.01] ${isCurrent
                     ? 'border-accent-gold/40 shadow-glow-gold bg-white/[0.09]'
                     : 'border-white/10 hover:border-white/20'
-                }`}
+                  }`}
               >
                 {/* Cover & Overlay Actions */}
                 <div className="relative aspect-square w-full rounded-2xl overflow-hidden mb-3 bg-[#111018] shadow-inner">
@@ -149,9 +145,8 @@ export const MusicSection: React.FC = () => {
 
                   {/* Play Button Overlay */}
                   <div
-                    className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${
-                      isCurrent && isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                    }`}
+                    className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${isCurrent && isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                      }`}
                   >
                     <div className="w-11 h-11 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-text-main shadow-lg transform transition-transform group-active:scale-90">
                       {isCurrent && isPlaying ? (
@@ -173,11 +168,10 @@ export const MusicSection: React.FC = () => {
                     className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center transition-transform active:scale-80 cursor-pointer min-h-[32px] min-w-[32px]"
                   >
                     <Heart
-                      className={`w-4 h-4 transition-colors ${
-                        isFav
+                      className={`w-4 h-4 transition-colors ${isFav
                           ? 'fill-accent-rose text-accent-rose filter drop-shadow'
                           : 'text-white/70 hover:text-white'
-                      }`}
+                        }`}
                     />
                   </button>
 
@@ -192,9 +186,8 @@ export const MusicSection: React.FC = () => {
                 {/* Song Meta */}
                 <div className="mb-2">
                   <h3
-                    className={`font-sans font-semibold text-sm sm:text-base truncate ${
-                      isCurrent ? 'text-accent-gold' : 'text-text-main'
-                    }`}
+                    className={`font-sans font-semibold text-sm sm:text-base truncate ${isCurrent ? 'text-accent-gold' : 'text-text-main'
+                      }`}
                   >
                     {song.title}
                   </h3>
@@ -213,9 +206,8 @@ export const MusicSection: React.FC = () => {
                     >
                       <span>Por qué elegí esta canción</span>
                       <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                          isNoteOpen ? 'rotate-180 text-accent-gold' : ''
-                        }`}
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${isNoteOpen ? 'rotate-180 text-accent-gold' : ''
+                          }`}
                       />
                     </button>
 
