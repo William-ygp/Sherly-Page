@@ -47,7 +47,7 @@ export interface TimelineItem {
 export interface PhotoItem {
   src: string;
   thumb?: string;
-  caption: string;
+  caption?: string;
   date?: string;
 }
 

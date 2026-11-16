@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { photos } from '../data/content';
 import { useFX } from '../context/HeartFXContext';
 import { normalizeAssetUrl } from '../utils/format';
-import { Camera, X, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
+import { Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const GallerySection: React.FC = () => {
   const { bigHeart } = useFX();
@@ -82,7 +82,7 @@ export const GallerySection: React.FC = () => {
             <div className="relative aspect-[4/5] w-full bg-[#121118] overflow-hidden">
               <img
                 src={normalizeAssetUrl(photo.thumb || photo.src)}
-                alt={photo.caption}
+                alt={`Recuerdo ${index + 1}`}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -111,20 +111,7 @@ export const GallerySection: React.FC = () => {
               </div>
             </div>
 
-            {/* Caption */}
-            {photo.caption && (
-              <div className="p-3 text-left">
-                <p className="font-sans text-xs text-text-main line-clamp-2 leading-relaxed">
-                  {photo.caption}
-                </p>
-                {photo.date && (
-                  <p className="font-sans text-[10px] text-text-muted mt-1 flex items-center gap-1">
-                    <Calendar className="w-2.5 h-2.5 text-accent-gold" />
-                    <span>{photo.date}</span>
-                  </p>
-                )}
-              </div>
-            )}
+
           </div>
         ))}
       </div>
@@ -175,7 +162,7 @@ export const GallerySection: React.FC = () => {
           >
             <img
               src={normalizeAssetUrl(photos[lightboxIndex].src)}
-              alt={photos[lightboxIndex].caption}
+              alt={`Recuerdo ${lightboxIndex + 1}`}
               className="w-full max-h-[65vh] object-contain bg-[#0b0a10]"
               onError={(e) => {
                 const target = e.target as HTMLElement;
@@ -193,17 +180,6 @@ export const GallerySection: React.FC = () => {
               </p>
             </div>
 
-            {/* Caption in lightbox */}
-            <div className="w-full p-4 sm:p-6 text-center border-t border-white/10 bg-[#07070B]/60">
-              <p className="font-serif italic text-lg sm:text-xl text-text-main">
-                {photos[lightboxIndex].caption}
-              </p>
-              {photos[lightboxIndex].date && (
-                <p className="font-sans text-xs text-text-muted mt-1">
-                  {photos[lightboxIndex].date}
-                </p>
-              )}
-            </div>
           </div>
         </div>
       )}

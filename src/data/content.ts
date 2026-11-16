@@ -96,28 +96,15 @@ export const timeline: TimelineItem[] = [
 ];
 
 export const photos: PhotoItem[] = [
-  {
-    src: "/photos/01.webp",
-    thumb: "/photos/01-thumb.webp",
-    caption: "Aquella tarde en el mirador mirando el atardecer juntos.",
-    date: "2024-02-14",
-  },
-  {
-    src: "/photos/02.webp",
-    thumb: "/photos/02-thumb.webp",
-    caption: "Tu sonrisa espontánea frente al mar.",
-    date: "2024-05-18",
-  },
-  {
-    src: "/photos/03.webp",
-    thumb: "/photos/03-thumb.webp",
-    caption: "Un café, una libreta y horas de confidencias.",
-    date: "2024-09-02",
-  },
-  {
-    src: "/photos/04.webp",
-    thumb: "/photos/04-thumb.webp",
-    caption: "Bajo la lluvia, riéndonos empapados.",
-    date: "2024-11-20",
-  },
+  { src: "/photos/1794860095329.jpg" },
+  { src: "/photos/1794860095405.jpg" },
+  { src: "/photos/IMG-20260829-WA0010.jpg" },
+  { src: "/photos/IMG-20261004-WA0048.jpg" },
+  { src: "/photos/IMG-20261014-WA0115.jpg" },
+  { src: "/photos/IMG-20261025-WA0040.jpg" },
+  { src: "/photos/IMG-20261105-WA0008.jpg" },
+  { src: "/photos/IMG-20261105-WA0009.jpg" },
+  { src: "/photos/IMG-20261112-WA0076.jpg" },
+  { src: "/photos/IMG-20261114-WA0000.jpg" },
+  { src: "/photos/Primera_cita.jpg" },
 ];
