@@ -28,7 +28,7 @@ export const ClosingSection: React.FC = () => {
 
         {/* Message */}
         <p className="font-sans text-text-muted text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto">
-          Gracias por cada momento, cada sonrisa y cada canción que hemos compartido. Esta página es
+          Gracias por cada momento, cada sonrisa y cada segundo que paso a tu lado. Esta página es
           solo un pequeño reflejo de todo lo que significas para mí.
         </p>
 
