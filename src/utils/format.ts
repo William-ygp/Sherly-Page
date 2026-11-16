@@ -5,12 +5,13 @@
  */
 export function normalizeAssetUrl(url?: string): string {
   if (!url) return '';
-  if (url.startsWith('/public/')) {
-    return url.replace('/public/', '/');
+  let clean = url;
+  if (clean.startsWith('/public/')) {
+    clean = clean.replace('/public/', '/');
+  } else if (clean.startsWith('public/')) {
+    clean = '/' + clean.replace('public/', '');
   }
-  if (url.startsWith('public/')) {
-    return '/' + url.replace('public/', '');
-  }
-  return url;
+  // encodeURI preserva las barras y codifica espacios para evitar problemas en navegadores y CSS
+  return encodeURI(clean);
 }
 
